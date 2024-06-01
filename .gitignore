@@ -253,3 +253,6 @@ $RECYCLE.BIN/
 
 #images
 *.png
+
+#base de datos
+database.sqlite
