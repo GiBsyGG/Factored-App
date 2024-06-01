@@ -34,6 +34,10 @@ def get_employee(employee_id: int = Path(..., title="The ID of the employee you 
     employee_service = EmployeeService(session)
     employee = employee_service.get_employee(employee_id)
     session.close()
+
+    if not employee:
+        return JSONResponse(content={"message": "Employee not found"}, status_code=404)
+    
     return JSONResponse(content=jsonable_encoder(employee), status_code=200)
 
 @employee_router.post("/employees", tags=["Employee"], response_model=EmployeeBase, status_code=201)
@@ -48,6 +52,12 @@ def create_employee(employee: EmployeeBase):
 def update_employee(employee: EmployeeBase, employee_id: int = Path(..., title="The ID of the employee you want to update", ge=1)):
     session = Session()
     employee_service = EmployeeService(session)
+
+    employee_by_id = employee_service.get_employee(employee_id)
+    if not employee_by_id:
+        session.close()
+        return JSONResponse(content={"message": "Employee not found"}, status_code=404)
+    
     employee_service.update_employee(employee_id, employee)
     session.close()
     return JSONResponse(content={"message": "Employee profile updated successfully"}, status_code=200)
@@ -56,6 +66,12 @@ def update_employee(employee: EmployeeBase, employee_id: int = Path(..., title="
 def delete_employee(employee_id: int = Path(..., title="The ID of the employee you want to delete", ge=1)):
     session = Session()
     employee_service = EmployeeService(session)
+
+    employee_by_id = employee_service.get_employee(employee_id)
+    if not employee_by_id:
+        session.close()
+        return JSONResponse(content={"message": "Employee not found"}, status_code=404)
+    
     employee_service.delete_employee(employee_id)
     session.close()
     return JSONResponse(content={"message": "Employee profile deleted successfully"}, status_code=204)
