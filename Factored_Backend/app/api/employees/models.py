@@ -6,9 +6,12 @@ class EmployeeModel(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
     position = Column(String, nullable=False)
     avatar_url = Column(String, nullable=True)
     _skills = Column(Text, nullable=False)  # Store skills as a comma-separated string for simplicity (skill:level,skill:level,...)
+    linkedin_url = Column(String, nullable=True)
+    about_employee = Column(Text, nullable=False)
     @property
     def skills(self):
         return {skill.split(":")[0]: int(skill.split(":")[1]) for skill in self._skills.split(",")}

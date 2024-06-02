@@ -12,6 +12,10 @@ class EmployeeService:
         hash_employee = hash(employee.name.lower().strip() + employee.position.lower().strip() + str(random.randint(1, 1000)))
         employee.avatar_url = f"https://www.gravatar.com/avatar/{hash_employee}?d=robohash&s=200"
 
+        # If not linkedin_url is provided, we use the company's linkedin page
+        if not employee.linkedin_url or employee.linkedin_url == "":
+            employee.linkedin_url = "https://www.linkedin.com/company/factoredai?trk=public_profile_experience-item_profile-section-card_subtitle-click&originalSubdomain=co"
+
         new_employee = EmployeeModel(**employee.dict())
         self.session.add(new_employee)
         self.session.commit()
