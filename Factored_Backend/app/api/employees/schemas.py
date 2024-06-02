@@ -5,7 +5,7 @@ class EmployeeBase(BaseModel):
     name: str
     position: str
     avatar_url: Optional[str] = None
-    skills: dict[str, int] = Field(min_items=3)
+    skills: dict[str, int] = Field(min_items=5)
 
     class Config:
         json_schema_extra = {
