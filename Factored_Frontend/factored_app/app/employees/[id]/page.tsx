@@ -41,8 +41,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const getEmployee = async (id: string): Promise<employee> => {
 
-
-
   try{
     const response = await axios.get<employee>(`http://127.0.0.1:8000/employees/${id}`);
     const employee = response.data;
