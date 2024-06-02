@@ -9,7 +9,7 @@ class EmployeeService:
     def create_employee(self, employee: EmployeeBase):
 
         # Using Gravatar to get the profile picture of the employee
-        hash_employee = hash(employee.name.lower().strip() + employee.position.lower().strip() + str(random.randint(1, 1000)))
+        hash_employee = hash(employee.name.lower().strip() + employee.position.lower().strip() + str(random.randint(1, 100)))
         employee.avatar_url = f"https://www.gravatar.com/avatar/{hash_employee}?d=robohash&s=200"
 
         # If not linkedin_url is provided, we use the company's linkedin page
