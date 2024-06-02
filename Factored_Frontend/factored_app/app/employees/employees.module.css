@@ -1,0 +1,17 @@
+.layout_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar_container {
+  height: 100%;
+  width: 20%;
+}
+
+.main_container {
+  height: 100%;
+  width: 80%;
+}
