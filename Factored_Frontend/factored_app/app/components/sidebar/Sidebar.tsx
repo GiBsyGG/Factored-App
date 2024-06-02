@@ -15,7 +15,7 @@ import List from '@mui/material/List';
 const menuItems = [
   {
     path: '/Login',
-    icon: <ImProfile  size={40} />,
+    icon: <FaUserLarge  size={40} />,
     title: 'Login',
     subTitle: 'Employee Login'
   },
@@ -33,7 +33,7 @@ const menuItems = [
   },
   {
     path: '/Employees/:id',
-    icon: <FaUserLarge size={40} />,
+    icon: <ImProfile size={40} />,
     title: 'My profile',
     subTitle: 'Employee Profile'
   }
