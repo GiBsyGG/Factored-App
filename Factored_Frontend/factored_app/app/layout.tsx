@@ -6,14 +6,14 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { styled } from "@mui/material";
 
 const roboto = Roboto({
-  weight: ['400', '700'],
+  weight: ['400', '500', '700'],
   subsets: ['latin'],
   style: 'normal',
   display: 'swap',
 });
 
 const inter = Inter({
-  weight: ['400', '700'],
+  weight: ['400', '500', '700'],
   subsets: ['latin'],
   style: 'normal',
   display: 'swap',

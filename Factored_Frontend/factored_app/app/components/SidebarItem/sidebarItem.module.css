@@ -14,7 +14,7 @@
   height: 60px;
   justify-content: flex-start;
   text-decoration: none;
-  border-bottom: 4px solid var(--secondary-color);
+  border-bottom: 4px solid var(--white-color);
 }
 
 .link_icon{
