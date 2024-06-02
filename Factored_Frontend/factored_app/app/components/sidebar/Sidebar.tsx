@@ -14,25 +14,25 @@ import List from '@mui/material/List';
 
 const menuItems = [
   {
-    path: '/Login',
+    path: '/login',
     icon: <FaUserLarge  size={40} />,
     title: 'Login',
     subTitle: 'Employee Login'
   },
   {
-    path: '/Register',
+    path: '/register',
     icon: <FaUserEdit size={40} />,
     title: 'Register',
     subTitle: 'Employee Registration'
   },
   {
-    path: '/Employees',
+    path: '/employees',
     icon: <FaUsers size={40} />,
     title: 'Employees',
     subTitle: 'Factored Team Members'
   },
   {
-    path: '/Employees/:id',
+    path: '/employees/:id',
     icon: <ImProfile size={40} />,
     title: 'My profile',
     subTitle: 'Employee Profile'
