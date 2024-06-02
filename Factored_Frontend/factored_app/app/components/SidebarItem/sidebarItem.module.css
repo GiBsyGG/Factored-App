@@ -14,12 +14,12 @@
   height: 60px;
   justify-content: flex-start;
   text-decoration: none;
-  background-color: var(--secondary-color);
+  border-bottom: 4px solid var(--secondary-color);
 }
 
 .link_icon{
   color: var(--white-color);
-  margin-left: 28px;
+  margin-left: 8px;
 }
 
 .link_text{
