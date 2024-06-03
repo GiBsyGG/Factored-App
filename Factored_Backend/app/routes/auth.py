@@ -5,6 +5,7 @@ from passlib.context import CryptContext
 from fastapi.encoders import jsonable_encoder
 
 from app.schemas.user import UserBase
+from app.api.employees.schemas import EmployeeBase
 from app.api.employees.service import EmployeeService
 from app.config.database import Session
 
@@ -37,6 +38,28 @@ def login(user: UserBase):
     generated_token = write_token({"email": user.email})
     return JSONResponse(content={"token": generated_token, "employee_id": employee.id}, status_code=200)
 
+@auth_routes.post('/register', tags=["Auth"], status_code=201)
+def register(new_employee: EmployeeBase):
+
+    session = Session()
+
+    # find user in database
+    employee_service = EmployeeService(session)
+    employee = employee_service.get_employee_by_email(new_employee.email)
+
+    if employee:
+        session.close()
+        return JSONResponse(content={"message": "User already exists"}, status_code=409)
+    
+    # create new user
+    new_employee_created = employee_service.create_employee(new_employee)
+    
+    new_employee_created_id = employee_service.get_employee_by_email(new_employee.email).id
+
+    session.close()
+
+    generated_token = write_token({"email": new_employee.email})
+    return JSONResponse(content={"token": generated_token, "employee_id": new_employee_created_id}, status_code=201)
 
 @auth_routes.post('/verify/token', tags=["Auth"])
 def verify_token(authorization: Optional[str] = Header(None)):

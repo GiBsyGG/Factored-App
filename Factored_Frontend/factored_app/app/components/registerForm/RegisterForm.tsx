@@ -55,33 +55,38 @@ export function RegisterForm() {
     }
     
     // Probably not a secure way to send the data with password
-    // const response = await axios.post('http://127.0.0.1:8000/auth/login', {
-    //   email: formData.get('email'),
-    //   password: formData.get('password')
-    // })
+    const response = await axios.post('http://127.0.0.1:8000/auth/register', {
+      email: formData.get('email'),
+      hashed_password: formData.get('password'),
+      name: formData.get('name'),
+      position: formData.get('CompanyPosition'),
+      linkedin_url: formData.get('linkedinURL'),
+      about_employee: formData.get('bio'),
+      skills: skills_dict
+    })
     
   
-    // if (response.status === 200) {
-    //   const data = response.data
-    //   const token = data.token
-    //   const employee_id: number = data.employee_id
+    if (response.status === 201) {
+      const data = response.data
+      const token = data.token
+      const employee_id: number = data.employee_id
   
-    //   // Save the token and employee as cookie
-    //   setCookie('accessToken', token, {
-    //     maxAge: 60 * 60, // 1 hour
-    //     path: '/',
-    //   })
+      // Save the token and employee as cookie
+      setCookie('accessToken', token, {
+        maxAge: 60 * 60, // 1 hour
+        path: '/',
+      })
   
-    //   setCookie('employee_id', employee_id.toString(), {
-    //     maxAge: 60 * 60, // 1 hour
-    //     path: '/',
-    //   })
+      setCookie('employee_id', employee_id.toString(), {
+        maxAge: 60 * 60, // 1 hour
+        path: '/',
+      })
   
-    //   // Redirect to the profile page with the employee id
-    //   router.push(`/employees/${employee_id}`)
-    // } else {
-    //   notFound();
-    // }
+      // Redirect to the profile page with the employee id
+      router.push(`/employees/${employee_id}`)
+    } else {
+      notFound();
+    }
     
   }
 
