@@ -291,4 +291,4 @@ $RECYCLE.BIN/
 *.png
 
 #base de datos
-database.sqlite
+#database.sqlite
