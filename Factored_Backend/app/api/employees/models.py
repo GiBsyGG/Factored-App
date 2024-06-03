@@ -7,6 +7,7 @@ class EmployeeModel(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True)
+    hashed_password = Column(String, nullable=False)
     position = Column(String, nullable=False)
     avatar_url = Column(String, nullable=True)
     _skills = Column(Text, nullable=False)  # Store skills as a comma-separated string for simplicity (skill:level,skill:level,...)

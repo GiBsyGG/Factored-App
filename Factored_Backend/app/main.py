@@ -3,12 +3,19 @@ from fastapi.responses import HTMLResponse
 
 from.config.database import engine, Base
 
+from dotenv import load_dotenv
+
 # TODO: Create and import the error handler middleware
 # from middlewares.error_handler import Error_handler
 
 from.api.employees.router import employee_router
+from.routes.auth import auth_routes
 
 app = FastAPI()
+
+# Load the environment variables
+load_dotenv()
+
 
 app.title = "Employee API"
 app.version = "0.0.1"
@@ -18,6 +25,7 @@ app.version = "0.0.1"
 
 #Include the routers
 app.include_router(employee_router)
+app.include_router(auth_routes, prefix="/auth")
 
 
 # To create the tables in the database

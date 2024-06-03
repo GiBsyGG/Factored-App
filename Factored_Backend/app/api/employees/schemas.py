@@ -1,9 +1,10 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 from typing import Optional
 
 class EmployeeBase(BaseModel):
     name: str
-    email: str
+    email: EmailStr
+    hashed_password: str
     position: str
     avatar_url: Optional[str] = None
     skills: dict[str, int] = Field(min_items=5)
@@ -14,6 +15,7 @@ class EmployeeBase(BaseModel):
             "example": {
                 "name": "John Doe",
                 "email": "Jhon_Doe@factored.com",
+                "hashed_password": "password",
                 "position": "Software Engineer",
                 "avatar_url": "https://example.com/avatar.jpg",
                 "skills": {

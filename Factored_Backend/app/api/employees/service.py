@@ -2,11 +2,19 @@ import random
 from.models import EmployeeModel
 from.schemas import EmployeeBase
 
+from passlib.context import CryptContext
+
+# create a new instance of CryptContext
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 class EmployeeService:
     def __init__(self, session):
         self.session = session
 
     def create_employee(self, employee: EmployeeBase):
+
+        # Hash the password
+        employee.hashed_password = str(pwd_context.hash(employee.hashed_password))
 
         # Using Gravatar to get the profile picture of the employee
         hash_employee = hash(employee.name.lower().strip() + employee.position.lower().strip() + str(random.randint(1, 100)))
@@ -23,6 +31,10 @@ class EmployeeService:
 
     def get_employee(self, employee_id: int):
         result = self.session.query(EmployeeModel).filter(EmployeeModel.id == employee_id).first()
+        return result
+    
+    def get_employee_by_email(self, email: str):
+        result = self.session.query(EmployeeModel).filter(EmployeeModel.email == email).first()
         return result
 
     def get_employees(self):
