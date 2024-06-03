@@ -66,6 +66,12 @@ Wait for the output indicating that the containers are up and running.
 - Go to `http://localhost:3000` to view the Next.js frontend of the application.
 - Go to `http://localhost:8000/docs` to interact with the FastAPI backend. Note that some API endpoints may require additional parameters or headers depending on the functionality.
 
+```sh
+# Example User Credentials
+email: Jhon_Doe@factored.com
+password: password
+```
+
 ## Troubleshooting
 
 If you encounter any issues while trying to run the application, refer to the error messages displayed in your terminal or command prompt. Common issues include:
