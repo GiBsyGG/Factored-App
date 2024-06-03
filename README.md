@@ -35,6 +35,11 @@ git clone https://github.com/GiBsyGG/Factored-App.git
 #### Step 2: Run the Application
 
 1. Navigate to the cloned repository directory, and execute the next commands in the command line
+   
+```sh
+cd .\Factored-App\
+```
+
 2. create the backend image
 
 ```sh
