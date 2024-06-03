@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from.config.database import engine, Base
 
@@ -12,6 +13,19 @@ from.api.employees.router import employee_router
 from.routes.auth import auth_routes
 
 app = FastAPI()
+
+# Add the CORS middleware
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load the environment variables
 load_dotenv()

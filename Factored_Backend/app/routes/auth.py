@@ -1,6 +1,8 @@
+from typing import Optional
 from fastapi import APIRouter, Header
 from fastapi.responses import JSONResponse
 from passlib.context import CryptContext
+from fastapi.encoders import jsonable_encoder
 
 from app.schemas.user import UserBase
 from app.api.employees.service import EmployeeService
@@ -32,10 +34,13 @@ def login(user: UserBase):
         return JSONResponse(content={"message": "Incorrect password"}, status_code=401)
     session.close()
 
-    return write_token({"email": user.email})
+    generated_token = write_token({"email": user.email})
+    return JSONResponse(content={"token": generated_token, "employee_id": employee.id}, status_code=200)
 
 
 @auth_routes.post('/verify/token', tags=["Auth"])
-def verify_token(authorization: str = Header(None)):
-    token = authorization.split(" ")[1]
-    return validate_token(token)
+def verify_token(authorization: Optional[str] = Header(None)):
+    token = authorization
+    if not authorization:
+        return JSONResponse(content={"message": "Invalid authorization header"}, status_code=422)
+    return validate_token(token, output=True)

@@ -29,7 +29,7 @@ def get_employees():
     return JSONResponse(content=jsonable_encoder(employees), status_code=200)
 
 @employee_router.get("/employees/{employee_id}", tags=["Employee"], response_model=EmployeeBase, status_code=200,
-                    dependencies=[Depends(JWTBearer())])
+                    dependencies=[Depends(JWTBearer)])
 def get_employee(employee_id: int = Path(..., title="The ID of the employee you want to get", ge=1)):
     session = Session()
     employee_service = EmployeeService(session)
@@ -50,7 +50,7 @@ def create_employee(employee: EmployeeBase):
     return JSONResponse(content={"message": "Employee profile created successfully"}, status_code=201)
 
 @employee_router.put("/employees/{employee_id}", tags=["Employee"], response_model=EmployeeBase, status_code=200, 
-                    dependencies=[Depends(JWTBearer())])
+                    dependencies=[Depends(JWTBearer)])
 def update_employee(employee: EmployeeBase, employee_id: int = Path(..., title="The ID of the employee you want to update", ge=1)):
     session = Session()
     employee_service = EmployeeService(session)
@@ -64,7 +64,7 @@ def update_employee(employee: EmployeeBase, employee_id: int = Path(..., title="
     session.close()
     return JSONResponse(content={"message": "Employee profile updated successfully"}, status_code=200)
 
-@employee_router.delete("/employees/{employee_id}", tags=["Employee"], status_code=204, dependencies=[Depends(JWTBearer())])
+@employee_router.delete("/employees/{employee_id}", tags=["Employee"], status_code=204, dependencies=[Depends(JWTBearer)])
 def delete_employee(employee_id: int = Path(..., title="The ID of the employee you want to delete", ge=1)):
     session = Session()
     employee_service = EmployeeService(session)

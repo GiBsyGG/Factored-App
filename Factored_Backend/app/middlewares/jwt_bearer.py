@@ -8,6 +8,9 @@ class JWTBearer(HTTPBearer):
         auth = await super().__call__(request)
         validate = validate_token(auth.credentials, output=True)
 
+        # Transforme the JSON response to a dict
+        validate = validate.json()
+
         # verificar si el usuario está registrado
-        if validate.get("email") is None:
+        if validate.email is None:
             raise HTTPException(status_code=401, detail="Invalid token")

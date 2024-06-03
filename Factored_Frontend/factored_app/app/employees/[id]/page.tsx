@@ -14,6 +14,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { SkillsChart } from '@/employee/components';
 import { ContactItem } from '@/employee/components';
 
+import { getCookie } from 'cookies-next';
 
 interface Props {
   params: {
@@ -42,7 +43,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const getEmployee = async (id: string): Promise<employee> => {
 
   try{
-    const response = await axios.get<employee>(`http://127.0.0.1:8000/employees/${id}`);
+    // Using the auth token to get the employee data
+
+    const token = getCookie('accessToken');
+    const response = await axios.get<employee>(`http://127.0.0.1:8000/employees/${id}`,
+      { headers: { Authorization: 'Bearer ' + token } }
+    );
     const employee = response.data;
 
     return employee;
