@@ -17,7 +17,7 @@ class EmployeeService:
         employee.hashed_password = str(pwd_context.hash(employee.hashed_password))
 
         # Using Gravatar to get the profile picture of the employee
-        hash_employee = hash(employee.name.lower().strip() + employee.position.lower().strip() + str(random.randint(1, 100)))
+        hash_employee = str(abs(hash(employee.email.lower())))
         employee.avatar_url = f"https://www.gravatar.com/avatar/{hash_employee}?d=robohash&s=200"
 
         # If not linkedin_url is provided, we use the company's linkedin page
