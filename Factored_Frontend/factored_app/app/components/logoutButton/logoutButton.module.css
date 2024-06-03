@@ -1,0 +1,14 @@
+.logout_text {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--white-color);
+}
+
+.btn_container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 10%;
+  padding-left: 60px;
+}
