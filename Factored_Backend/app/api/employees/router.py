@@ -28,8 +28,7 @@ def get_employees():
     session.close()
     return JSONResponse(content=jsonable_encoder(employees), status_code=200)
 
-@employee_router.get("/employees/{employee_id}", tags=["Employee"], response_model=EmployeeBase, status_code=200,
-                    dependencies=[Depends(JWTBearer)])
+@employee_router.get("/employees/{employee_id}", tags=["Employee"], response_model=EmployeeBase, status_code=200)
 def get_employee(employee_id: int = Path(..., title="The ID of the employee you want to get", ge=1)):
     session = Session()
     employee_service = EmployeeService(session)
