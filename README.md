@@ -6,6 +6,12 @@ This repository contains the code for a full-stack web application. The backend 
 
 Our goal is to make this project easy to set up and run, even for those new to programming or system engineering.
 
+## Main Functions
+- Employee Login
+- Employee Profile Visualization
+- Employees Visualization
+- Register new Employees
+
 ## Getting Started
 
 To run this project locally, follow these simple steps. No programming knowledge required!
@@ -28,7 +34,7 @@ git clone https://github.com/yourusername/project-repository.git
 
 #### Step 2: Run the Application
 
-1. Navigate to the cloned repository directory.
+1. Navigate to the cloned repository directory, and execute the next commands in the command line
 2. create the backend image
 
 ```sh
