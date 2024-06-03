@@ -14,13 +14,13 @@ import List from '@mui/material/List';
 
 const menuItems = [
   {
-    path: '/login',
+    path: '/employees/login',
     icon: <FaUserLarge  size={40} />,
     title: 'Login',
     subTitle: 'Employee Login'
   },
   {
-    path: '/register',
+    path: '/employees/register',
     icon: <FaUserEdit size={40} />,
     title: 'Register',
     subTitle: 'Employee Registration'
