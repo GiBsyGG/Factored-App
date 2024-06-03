@@ -29,7 +29,7 @@ To run this project locally, follow these simple steps. No programming knowledge
 3. Type the following command and press Enter:
 
 ```sh
-git clone https://github.com/yourusername/project-repository.git
+git clone https://github.com/GiBsyGG/Factored-App.git
 ```
 
 #### Step 2: Run the Application
