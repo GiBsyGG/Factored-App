@@ -1,6 +1,6 @@
 from jwt import encode, decode
 from jwt import exceptions
-from  datetime import datetime, timedelta
+from datetime import datetime, timedelta
 from fastapi.responses import JSONResponse
 
 from os import getenv

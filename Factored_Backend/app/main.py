@@ -2,26 +2,27 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from.config.database import engine, Base
+from app.config.database import engine, Base
 
 from dotenv import load_dotenv
 
 # TODO: Create and import the error handler middleware
 # from middlewares.error_handler import Error_handler
 
-from.api.employees.router import employee_router
-from.routes.auth import auth_routes
+from app.api.employees.router import employee_router
+from app.routes.auth import auth_routes
 
 app = FastAPI()
 
 # Add the CORS middleware
 origins = [
     "http://localhost:3000",
+    "*"
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

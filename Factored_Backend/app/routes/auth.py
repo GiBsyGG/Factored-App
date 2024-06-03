@@ -1,5 +1,6 @@
 from typing import Optional
 from fastapi import APIRouter, Header
+from fastapi import Path, Depends
 from fastapi.responses import JSONResponse
 from passlib.context import CryptContext
 from fastapi.encoders import jsonable_encoder
@@ -35,8 +36,10 @@ def login(user: UserBase):
         return JSONResponse(content={"message": "Incorrect password"}, status_code=401)
     session.close()
 
-    generated_token = write_token({"email": user.email})
-    return JSONResponse(content={"token": generated_token, "employee_id": employee.id}, status_code=200)
+    #print(user.email)
+    #generated_token = write_token({"email": user.email})
+    # TODO: Fix the token generation in production
+    return JSONResponse(content={"token": "123", "employee_id": employee.id}, status_code=200)
 
 @auth_routes.post('/register', tags=["Auth"], status_code=201)
 def register(new_employee: EmployeeBase):
@@ -58,8 +61,9 @@ def register(new_employee: EmployeeBase):
 
     session.close()
 
-    generated_token = write_token({"email": new_employee.email})
-    return JSONResponse(content={"token": generated_token, "employee_id": new_employee_created_id}, status_code=201)
+    # TODO: Fix the token generation in production
+    # generated_token = write_token({"email": new_employee.email})
+    return JSONResponse(content={"token": "123", "employee_id": new_employee_created_id}, status_code=201)
 
 @auth_routes.post('/verify/token', tags=["Auth"])
 def verify_token(authorization: Optional[str] = Header(None)):
@@ -67,3 +71,25 @@ def verify_token(authorization: Optional[str] = Header(None)):
     if not authorization:
         return JSONResponse(content={"message": "Invalid authorization header"}, status_code=422)
     return validate_token(token, output=True)
+
+
+# Routes for testing purposes
+@auth_routes.get("/employees", tags=["Employee"], response_model=list[EmployeeBase], status_code=200)
+def get_employees():
+    session = Session()
+    employee_service = EmployeeService(session)
+    employees = employee_service.get_employees()
+    session.close()
+    return JSONResponse(content=jsonable_encoder(employees), status_code=200)
+
+@auth_routes.get("/employees/{employee_id}", tags=["Employee"], response_model=EmployeeBase, status_code=200)
+def get_employee(employee_id: int = Path(..., title="The ID of the employee you want to get", ge=1)):
+    session = Session()
+    employee_service = EmployeeService(session)
+    employee = employee_service.get_employee(employee_id)
+    session.close()
+
+    if not employee:
+        return JSONResponse(content={"message": "Employee not found"}, status_code=404)
+    
+    return JSONResponse(content=jsonable_encoder(employee), status_code=200)

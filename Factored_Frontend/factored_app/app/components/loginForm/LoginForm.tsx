@@ -31,7 +31,7 @@ export function LoginForm() {
     const formData = new FormData(event.currentTarget)
     try {
       // Probably not a secure way to send the data with password
-      const response = await axios.post('http://127.0.0.1:8000/auth/login', {
+      const response = await axios.post('http://localhost:8000/auth/login', {
         email: formData.get('email'),
         password: formData.get('password')
       })

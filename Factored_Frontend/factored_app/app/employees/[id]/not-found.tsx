@@ -12,7 +12,7 @@ export default function NotFound() {
       <h1 className={style.title}>404</h1>
       <h2 className={style.subtitle}>Employee Not Found</h2>
       <Button  variant="contained" className={style.button} sx={{bgcolor: "#42B6C5", "&:hover": {bgcolor: cyan[800]}}}>
-        <Link className={style.link} href="/">Return</Link>
+        <Link className={style.link} href="./">Return</Link>
       </Button>
     </div>
   )

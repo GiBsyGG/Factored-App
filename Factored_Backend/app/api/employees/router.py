@@ -8,13 +8,13 @@ from fastapi.encoders import jsonable_encoder
 
 from app.config.database import Session
 
-from.models import EmployeeModel
+from app.api.employees.models import EmployeeModel
 
 from app.middlewares.jwt_bearer import JWTBearer
 
-from.service import EmployeeService
+from app.api.employees.service import EmployeeService
 
-from.schemas import EmployeeBase
+from app.api.employees.schemas import EmployeeBase
 
 employee_router = APIRouter()
 

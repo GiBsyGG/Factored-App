@@ -1,6 +1,6 @@
 import random
-from.models import EmployeeModel
-from.schemas import EmployeeBase
+from app.api.employees.models import EmployeeModel
+from app.api.employees.schemas import EmployeeBase
 
 from passlib.context import CryptContext
 

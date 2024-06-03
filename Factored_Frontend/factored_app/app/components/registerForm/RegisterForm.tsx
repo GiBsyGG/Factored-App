@@ -59,7 +59,7 @@ export function RegisterForm() {
       }
       
       // Probably not a secure way to send the data with password
-      const response = await axios.post('http://127.0.0.1:8000/auth/register', {
+      const response = await axios.post('http://localhost:8000/auth/register', {
         email: formData.get('email'),
         hashed_password: formData.get('password'),
         name: formData.get('name'),

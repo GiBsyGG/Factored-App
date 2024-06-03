@@ -1,3 +1,5 @@
+'use client'
+
 import { employee } from "@/employee/interfaces/employee";
 
 import style from "./employeesMain.module.css";
@@ -11,25 +13,31 @@ import Grid from "@mui/material/Grid";
 
 import axios from "axios";
 import { notFound } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
+export default function Page() {
 
-const getEmployees = async (): Promise<employee[]> => {
+  const [employees, setEmployees] = useState<employee[]>([]);
 
-  try{
-    const response = await axios.get<employee[]>(`http://127.0.0.1:8000/employees`);
-    const employees = response.data;
+  const getEmployees = async (): Promise<employee[]> => {
 
-    return employees;
+    try{
+      const response = await axios.get<employee[]>('http://localhost:8000/employees');
+      const employees = response.data;
 
-  } catch (error) {
-    notFound();
+      setEmployees(employees);
+      return employees;
+  
+    } catch (error) {
+      console.log(error);
+      notFound();
+    }
   }
-}
 
-export default async function Page() {
-
-  const employees = await getEmployees();
+  useEffect(() => {
+    getEmployees();
+  }, []);
 
   return (
     <main>
@@ -40,7 +48,7 @@ export default async function Page() {
         </div>
         <div className={style.employees_list_container}>
           <Grid container rowSpacing={2} columnSpacing={4}>
-            {employees.map((employee) => (
+            {employees.map((employee: employee) => (
               <Grid item xs={12} sm={6} md={4} key={employee.id}>
                 <Card>
                   <CardActionArea href={`./employees/${employee.id}`}>
